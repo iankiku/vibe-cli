@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0",
+  "created_at": "2025-05-26T10:46:34-05:00",
+  "system": {
+    "python": {
+      "major": 3,
+      "minor": 9,
+      "micro": 5,
+      "full": "3.9.5"
+    },
+    "os": {
+      "system": "Darwin",
+      "release": "21.6.0",
+      "version": "Darwin Kernel Version 21.6.0"
+    },
+    "shell": "zsh"
+  },
+  "package_managers": {
+    "npm": "8.19.3",
+    "yarn": "1.22.19",
+    "pnpm": null
+  },
+  "mcpServers": {
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "abc-123-defghi"
+      }
+    },
+    "example-server": {
+      "command": "node",
+      "args": [
+        "server.js"
+      ],
+      "env": {
+        "PORT": "3000",
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "preferences": {
+    "editor": "vscode",
+    "theme": "dark",
+    "default_git_branch": "main"
+  },
+  "shortcuts": {
+    "deploy": "vibe push && npm run build && npm run deploy",
+    "setup-project": "vibe init && vibe install all && vibe create env"
+  }
+}

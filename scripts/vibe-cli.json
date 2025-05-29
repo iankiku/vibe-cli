@@ -1,0 +1,21 @@
+{
+  "version": "0.1.0",
+  "description": "Natural language interface for developer tools",
+  "homepage": "https://github.com/yourusername/vibe-cli",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/yourusername/vibe-cli/releases/download/v0.1.0/vibe-cli-windows-amd64.zip",
+      "hash": "placeholder-for-actual-hash"
+    }
+  },
+  "bin": "vibe.exe",
+  "checkver": "github",
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/yourusername/vibe-cli/releases/download/v$version/vibe-cli-windows-amd64.zip"
+      }
+    }
+  }
+}
