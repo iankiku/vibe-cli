@@ -1,0 +1,65 @@
+{
+  "name": "vibe-cli",
+  "version": "0.1.0",
+  "description": "Natural language wrapper for git, npm, and python commands",
+  "main": "dist/main.js",
+  "bin": {
+    "vibe-node": "./dist/main.js",
+    "install-alias": "./dist/main.js install-alias"
+  },
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/main.js",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build && npm run lint && npm run test",
+    "clean": "rm -rf dist",
+    "rebuild": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "cli",
+    "vibe coding",
+    "git",
+    "npm",
+    "python",
+    "node",
+    "typescript"
+  ],
+  "author": "Ian Kiku <hey@vibetools.dev>",
+  "license": "AGPL-3.0",
+  "homepage": "https://vibecloud.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iankiku/vibe-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iankiku/vibe-cli/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "js-yaml": "^4.1.0",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/commander": "^2.12.0",
+    "@types/jest": "^27.5.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^16.18.126",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.0.0",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.5.2"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}
