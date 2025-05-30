@@ -1,0 +1,65 @@
+# Node.js specific
+node_modules/
+dist/
+coverage/
+build/
+.npm/
+.eslintcache
+.node_repl_history
+
+# TypeScript specific
+*.tsbuildinfo
+*.js.map
+.nyc_output/
+
+# Build and packaging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+package-lock.json
+yarn.lock
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Testing
+coverage/
+*.lcov
+.nyc_output/
+
+# Environment and IDE
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Temp directories
+.tmp/
+.temp/
+
+# Generated files
+embedded/

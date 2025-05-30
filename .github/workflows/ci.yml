@@ -1,0 +1,118 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./python-package
+    steps:
+      - uses: actions/checkout@v4 # Updated to v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5 # Updated to v5
+        with:
+          python-version: '3.10'
+          
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3.1 # Pinned to a specific version for stability
+        # Consider using a more recent version if available and tested
+          
+      - name: Install dependencies
+        run: poetry install
+          
+      - name: Run tests
+        run: poetry run pytest
+          
+  test-node:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./node-package
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: node-package/package-lock.json
+          
+      - name: Install dependencies
+        run: npm ci
+          
+      - name: Lint TypeScript
+        run: npm run lint
+        
+      - name: Build TypeScript
+        run: npm run build
+          
+      - name: Run tests
+        run: npm test
+        
+      - name: Check TypeScript types
+        run: npx tsc --noEmit
+          
+  publish:
+    needs: [test-python, test-node]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions: # Added permissions for publishing
+      contents: read
+      id-token: write # For trusted publishing to PyPI
+
+    steps:
+      - uses: actions/checkout@v4 # Updated to v4
+      
+      # Python package publishing
+      - name: Set up Python
+        uses: actions/setup-python@v5 # Updated to v5
+        with:
+          python-version: '3.10'
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3.1 # Pinned version
+      - name: Install Python dependencies
+        working-directory: ./python-package
+        run: poetry install
+      - name: Build Python package
+        working-directory: ./python-package
+        run: poetry build
+      - name: Publish Python package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          # Note: Make sure this secret is set in the repository settings
+          packages-dir: python-package/dist/
+          verify_metadata: true
+          skip_existing: false
+          
+      # Node.js package publishing
+      - name: Set up Node.js
+        uses: actions/setup-node@v4 # Updated to v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: node-package/package-lock.json
+      - name: Install Node.js dependencies
+        working-directory: ./node-package
+        run: npm ci
+      - name: Build TypeScript for Node.js package
+        working-directory: ./node-package
+        run: npm run build
+      - name: Publish Node.js package to npm
+        working-directory: ./node-package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Note: Make sure this secret is set in the repository settings

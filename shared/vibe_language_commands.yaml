@@ -1,0 +1,189 @@
+# Natural language command mappings
+# Each key is a natural language phrase that users can type
+# Each value is the corresponding command in our command set to execute
+
+git:
+  # Status and information
+  "check status": "git.status"
+  "show status": "git.status"
+  "what changed": "git.diff"
+  "show changes": "git.diff"
+  "show history": "git.log"
+  "show log": "git.log"
+  "show remotes": "git.remote"
+  "list remotes": "git.remote"
+
+  # Adding and committing
+  "add everything": "git.add"
+  "add all files": "git.add"
+  "stage all": "git.add"
+  "add files": "git.stage"
+  "commit with message": "git.commit"
+  "save changes with message": "git.commit"
+  "amend last commit": "git.amend"
+
+  # Syncing changes
+  "push changes": "git.push"
+  "upload changes": "git.push"
+  "push to remote": "git.push"
+  "pull latest": "git.pull"
+  "pull changes": "git.pull"
+  "download changes": "git.pull"
+  "get updates": "git.pull"
+
+  # Repository operations
+  "initialize repository": "git.init"
+  "create new repo": "git.init"
+  "start git repo": "git.init"
+  "clone repository": "git.clone"
+  "get repository": "git.clone"
+
+  # Branch operations
+  "show branches": "git.branch"
+  "list branches": "git.branch"
+  "create branch": "git.new-branch"
+  "new branch": "git.new-branch"
+  "switch to branch": "git.switch"
+  "checkout branch": "git.switch"
+  "go to branch": "git.switch"
+  "merge branch": "git.merge"
+  "combine with branch": "git.merge"
+  "rebase onto branch": "git.rebase"
+
+  # Stash operations
+  "stash changes": "git.stash"
+  "save changes temporarily": "git.stash"
+  "hide changes": "git.stash"
+  "restore stashed changes": "git.pop"
+  "get stashed changes": "git.pop"
+  "apply stashed changes": "git.pop"
+  "remove stash": "git.drop"
+  "delete stash": "git.drop"
+
+  # Advanced operations
+  "tag version": "git.tag"
+  "create tag": "git.tag"
+  "fetch from remote": "git.fetch"
+  "reset to previous commit": "git.reset"
+  "undo last commit": "git.undo"
+  "remove untracked files": "git.clean"
+  "clean untracked files": "git.clean"
+  "who changed file": "git.blame"
+  "show commit details": "git.show"
+
+npm:
+  # Basic operations
+  "create package": "npm.init"
+  "initialize package": "npm.init"
+  "start new project": "npm.init"
+  "install dependencies": "npm.install"
+  "install packages": "npm.install"
+  "add package": "npm.add"
+  "install package": "npm.add"
+  "remove package": "npm.remove"
+  "uninstall package": "npm.remove"
+  "add dev dependency": "npm.dev"
+  "install development package": "npm.dev"
+  "install global package": "npm.global"
+  "add global package": "npm.global"
+
+  # Script operations
+  "run script": "npm.run"
+  "execute script": "npm.run"
+  "start application": "npm.start"
+  "start app": "npm.start"
+  "run server": "npm.start"
+  "test application": "npm.test"
+  "run tests": "npm.test"
+  "build application": "npm.build"
+  "build project": "npm.build"
+
+  # Package operations
+  "update packages": "npm.update"
+  "upgrade packages": "npm.update"
+  "show outdated packages": "npm.outdated"
+  "check outdated packages": "npm.outdated"
+  "list packages": "npm.list"
+  "show installed packages": "npm.list"
+  "check for vulnerabilities": "npm.audit"
+  "audit packages": "npm.audit"
+  "fix vulnerabilities": "npm.fix"
+  "publish package": "npm.publish"
+  "bump version": "npm.version"
+  "update version": "npm.version"
+
+python:
+  # Basic operations
+  "run script": "python.run"
+  "execute python": "python.run"
+  "run python file": "python.run"
+
+  # Virtual environment operations
+  "create virtual environment": "python.env"
+  "create venv": "python.env"
+  "make virtualenv": "python.env"
+  "activate environment": "python.activate"
+  "activate venv": "python.activate"
+  "use virtual environment": "python.activate"
+  "deactivate environment": "python.deactivate"
+  "exit venv": "python.deactivate"
+
+  # Package operations
+  "install python package": "python.install"
+  "pip install": "python.install"
+  "add python package": "python.install"
+  "uninstall python package": "python.uninstall"
+  "pip uninstall": "python.uninstall"
+  "remove python package": "python.uninstall"
+  "save requirements": "python.freeze"
+  "freeze packages": "python.freeze"
+  "export requirements": "python.freeze"
+  "list python packages": "python.list"
+  "show installed python packages": "python.list"
+  "upgrade python package": "python.upgrade"
+  "update python package": "python.upgrade"
+  "show outdated python packages": "python.outdated"
+
+  # Testing and linting
+  "run tests": "python.test"
+  "execute tests": "python.test"
+  "run pytest": "python.test"
+  "lint code": "python.lint"
+  "check code quality": "python.lint"
+  "format code": "python.format"
+  "prettify code": "python.format"
+
+  # Development tools
+  "start jupyter": "python.jupyter"
+  "open notebook": "python.jupyter"
+  "start jupyter lab": "python.lab"
+  "open jupyter lab": "python.lab"
+  "run django server": "python.django-run"
+  "start django": "python.django-run"
+  "migrate django": "python.django-migrate"
+  "apply migrations": "python.django-migrate"
+
+docker:
+  # Basic operations
+  "list containers": "docker.ps"
+  "show containers": "docker.ps"
+  "list images": "docker.images"
+  "show images": "docker.images"
+  "build image": "docker.build"
+  "create image": "docker.build"
+  "run container": "docker.run"
+  "start container": "docker.run"
+  "stop container": "docker.stop"
+  "halt container": "docker.stop"
+  "remove container": "docker.rm"
+  "delete container": "docker.rm"
+  "remove image": "docker.rmi"
+  "delete image": "docker.rmi"
+  "execute in container": "docker.exec"
+  "run command in container": "docker.exec"
+  "show container logs": "docker.logs"
+  "view logs": "docker.logs"
+  "start docker compose": "docker.compose-up"
+  "run docker compose": "docker.compose-up"
+  "stop docker compose": "docker.compose-down"
+  "shutdown docker compose": "docker.compose-down"

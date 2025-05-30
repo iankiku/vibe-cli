@@ -1,0 +1,427 @@
+schema_version: "1.0"
+
+system:
+  version:
+    description: "Displays the installed Vibe CLI version."
+    handler: "system.show_version"
+    telemetry_event: "cli_version_checked"
+    aliases: ["v"]
+  update:
+    description: "Updates the Vibe CLI to the latest version."
+    handler: "system.run_update"
+    telemetry_event: "cli_update_run"
+  update_check:
+    description: "Checks for available Vibe CLI updates."
+    handler: "system.check_update"
+    telemetry_event: "cli_update_check_run"
+    aliases: ["check"]
+  help:
+    description: "Shows help information for all commands."
+    handler: "system.show_help"
+    telemetry_event: "cli_help_executed"
+    aliases: ["h"]
+  uninstall:
+    description: "Completely uninstall Vibe CLI from the system."
+    handler: "vibe.commands.uninstall.uninstall_vibes"
+    telemetry_event: "cli_uninstall_executed"
+
+config:
+  get:
+    description: "Gets a value from the Vibe CLI configuration."
+    handler: "vibe.commands.config.get_value"
+    telemetry_event: "config_get_executed"
+    example: "vibe config get editor"
+  set:
+    description: "Sets a value in the Vibe CLI configuration."
+    handler: "vibe.commands.config.set_value"
+    telemetry_event: "config_set_executed"
+    example: "vibe config set editor vscode"
+  list:
+    description: "Lists all current Vibe CLI configurations."
+    handler: "vibe.commands.config.list_values"
+    telemetry_event: "config_list_executed"
+    example: "vibe config list"
+
+git:
+  # Basic operations
+  status:
+    command: "git status"
+    description: "Shows the working tree status."
+    telemetry_event: "git_status_executed"
+    aliases: ["s"]
+  diff:
+    command: "git diff"
+    description: "Shows changes not staged for commit."
+    telemetry_event: "git_diff_executed"
+    aliases: ["d"]
+  log:
+    command: "git log --oneline -n 10"
+    description: "Shows commit history in a concise format."
+    telemetry_event: "git_log_executed"
+    aliases: ["l"]
+  add:
+    command: "git add ."
+    description: "Adds all changes to the staging area."
+    telemetry_event: "git_add_all_executed"
+    aliases: ["a"]
+  stage:
+    command: "git add {files}"
+    description: "Adds specific files to the staging area."
+    telemetry_event: "git_add_files_executed"
+  commit:
+    command: "git commit -m \"{message}\""
+    description: "Commits staged changes with a message."
+    telemetry_event: "git_commit_executed"
+    aliases: ["c"]
+  amend:
+    command: "git commit --amend"
+    description: "Amends the last commit."
+    telemetry_event: "git_amend_executed"
+  push:
+    command: "git push"
+    description: "Pushes commits to the remote repository."
+    telemetry_event: "git_push_executed"
+    aliases: ["p"]
+  pull:
+    command: "git pull"
+    description: "Pulls changes from the remote repository."
+    telemetry_event: "git_pull_executed"
+  
+  # Repository operations
+  init:
+    command: "git init"
+    description: "Initializes a new Git repository."
+    telemetry_event: "git_init_executed"
+  clone:
+    command: "git clone {url}"
+    description: "Clones a repository from a URL."
+    telemetry_event: "git_clone_executed"
+  
+  # Branch operations
+  branch:
+    command: "git branch"
+    description: "Lists all branches."
+    telemetry_event: "git_branch_executed"
+    aliases: ["b"]
+  new-branch:
+    command: "git checkout -b {name}"
+    description: "Creates and switches to a new branch."
+    telemetry_event: "git_new_branch_executed"
+    aliases: ["nb"]
+  switch:
+    command: "git checkout {branch}"
+    description: "Switches to a different branch."
+    telemetry_event: "git_switch_branch_executed"
+    aliases: ["sw"]
+  merge:
+    command: "git merge {branch}"
+    description: "Merges specified branch into current branch."
+    telemetry_event: "git_merge_executed"
+  rebase:
+    command: "git rebase {branch}"
+    description: "Rebases current branch onto specified branch."
+    telemetry_event: "git_rebase_executed"
+  
+  # Stash operations
+  stash:
+    command: "git stash"
+    description: "Stashes changes in the working directory."
+    telemetry_event: "git_stash_executed"
+    aliases: ["st"]
+  pop:
+    command: "git stash pop"
+    description: "Applies and removes the latest stash."
+    telemetry_event: "git_stash_pop_executed"
+  drop:
+    command: "git stash drop"
+    description: "Discards the latest stash."
+    telemetry_event: "git_stash_drop_executed"
+  
+  # Advanced operations
+  tag:
+    command: "git tag {tag_name}"
+    description: "Creates a new tag at the current commit."
+    telemetry_event: "git_tag_executed"
+  remote:
+    command: "git remote -v"
+    description: "Shows remote repositories."
+    telemetry_event: "git_remote_executed"
+  fetch:
+    command: "git fetch"
+    description: "Downloads objects and refs from remote repository."
+    telemetry_event: "git_fetch_executed"
+  reset:
+    command: "git reset {target}"
+    description: "Resets current HEAD to specified state."
+    telemetry_event: "git_reset_executed"
+  undo:
+    command: "git reset HEAD~1"
+    description: "Undoes the last commit but preserves changes."
+    telemetry_event: "git_undo_executed"
+  clean:
+    command: "git clean -fd"
+    description: "Removes untracked files from working tree."
+    telemetry_event: "git_clean_executed"
+  blame:
+    command: "git blame {file}"
+    description: "Shows who last modified each line of a file."
+    telemetry_event: "git_blame_executed"
+  show:
+    command: "git show {commit}"
+    description: "Shows commit details."
+    telemetry_event: "git_show_executed"
+
+npm:
+  # Basic operations
+  init:
+    command: "npm init -y"
+    description: "Initializes a new Node.js project."
+    package_manager_sensitive: true
+    telemetry_event: "npm_init_executed"
+    aliases: ["i"]
+  install:
+    command: "npm install"
+    description: "Installs all dependencies."
+    package_manager_sensitive: true
+    telemetry_event: "npm_install_executed"
+    aliases: ["i"]
+  add:
+    command: "npm install {package}"
+    description: "Installs a package."
+    package_manager_sensitive: true
+    telemetry_event: "npm_add_package_executed"
+    aliases: ["a"]
+  remove:
+    command: "npm uninstall {package}"
+    description: "Uninstalls a package."
+    package_manager_sensitive: true
+    telemetry_event: "npm_remove_package_executed"
+    aliases: ["rm"]
+  dev:
+    command: "npm install {package} --save-dev"
+    description: "Installs a package as a dev dependency."
+    package_manager_sensitive: true
+    telemetry_event: "npm_install_dev_executed"
+    aliases: ["d"]
+  global:
+    command: "npm install -g {package}"
+    description: "Installs a package globally."
+    package_manager_sensitive: true
+    telemetry_event: "npm_install_global_executed"
+    aliases: ["g"]
+  
+  # Script operations
+  run:
+    command: "npm run {script}"
+    description: "Runs a script defined in package.json."
+    package_manager_sensitive: true
+    telemetry_event: "npm_run_script_executed"
+    aliases: ["r"]
+  start:
+    command: "npm start"
+    description: "Runs the start script defined in package.json."
+    package_manager_sensitive: true
+    telemetry_event: "npm_start_executed"
+  test:
+    command: "npm test"
+    description: "Runs the test script defined in package.json."
+    package_manager_sensitive: true
+    telemetry_event: "npm_test_executed"
+    aliases: ["t"]
+  build:
+    command: "npm run build"
+    description: "Runs the build script defined in package.json."
+    package_manager_sensitive: true
+    telemetry_event: "npm_build_executed"
+    aliases: ["b"]
+  
+  # Package operations
+  update:
+    command: "npm update"
+    description: "Updates all packages to their latest version."
+    package_manager_sensitive: true
+    telemetry_event: "npm_update_executed"
+    aliases: ["up"]
+  outdated:
+    command: "npm outdated"
+    description: "Checks for outdated packages."
+    package_manager_sensitive: true
+    telemetry_event: "npm_outdated_executed"
+    aliases: ["out"]
+  list:
+    command: "npm list --depth=0"
+    description: "Lists installed packages."
+    package_manager_sensitive: true
+    telemetry_event: "npm_list_executed"
+    aliases: ["ls"]
+  audit:
+    command: "npm audit"
+    description: "Checks for known vulnerabilities in dependencies."
+    package_manager_sensitive: true
+    telemetry_event: "npm_audit_executed"
+  fix:
+    command: "npm audit fix"
+    description: "Automatically fixes issues found by npm audit."
+    package_manager_sensitive: true
+    telemetry_event: "npm_audit_fix_executed"
+  publish:
+    command: "npm publish"
+    description: "Publishes package to npm registry."
+    package_manager_sensitive: true
+    telemetry_event: "npm_publish_executed"
+  version:
+    command: "npm version {type}"
+    description: "Bumps package version (patch, minor, major)."
+    package_manager_sensitive: true
+    telemetry_event: "npm_version_executed"
+
+python:
+  # Basic operations
+  run:
+    command: "python {script}"
+    description: "Runs a Python script."
+    telemetry_event: "python_run_executed"
+    aliases: ["r"]
+  
+  # Virtual environment operations
+  env:
+    command: "python -m venv venv"
+    description: "Creates a virtual environment named 'venv'."
+    telemetry_event: "python_env_created"
+    aliases: ["ve"]
+  activate:
+    handler: "python.activate_venv"
+    description: "Activates a virtual environment."
+    telemetry_event: "python_venv_activated"
+    aliases: ["act"]
+  deactivate:
+    command: "deactivate"
+    description: "Deactivates the current virtual environment."
+    telemetry_event: "python_venv_deactivated"
+    aliases: ["deact"]
+  
+  # Package operations
+  install:
+    command: "pip install {package}"
+    description: "Installs a Python package."
+    telemetry_event: "python_install_package_executed"
+    aliases: ["i"]
+  uninstall:
+    command: "pip uninstall -y {package}"
+    description: "Uninstalls a Python package."
+    telemetry_event: "python_uninstall_package_executed"
+    aliases: ["rm"]
+  freeze:
+    command: "pip freeze > requirements.txt"
+    description: "Saves installed packages to requirements.txt."
+    telemetry_event: "python_freeze_executed"
+    aliases: ["f"]
+  list:
+    command: "pip list"
+    description: "Lists installed packages."
+    telemetry_event: "python_list_packages_executed"
+    aliases: ["ls"]
+  upgrade:
+    command: "pip install --upgrade {package}"
+    description: "Upgrades a Python package to the latest version."
+    telemetry_event: "python_upgrade_package_executed"
+    aliases: ["up"]
+  outdated:
+    command: "pip list --outdated"
+    description: "Lists outdated packages."
+    telemetry_event: "python_outdated_packages_executed"
+    aliases: ["out"]
+  
+  # Testing and linting
+  test:
+    command: "python -m pytest"
+    description: "Runs pytest tests."
+    telemetry_event: "python_pytest_executed"
+    aliases: ["t"]
+  lint:
+    command: "python -m flake8"
+    description: "Runs flake8 linter."
+    telemetry_event: "python_flake8_executed"
+    aliases: ["l"]
+  format:
+    command: "python -m black ."
+    description: "Formats code using black."
+    telemetry_event: "python_black_executed"
+    aliases: ["fmt"]
+  
+  # Development tools
+  jupyter:
+    command: "jupyter notebook"
+    description: "Starts Jupyter Notebook server."
+    telemetry_event: "python_jupyter_executed"
+    aliases: ["jp"]
+  lab:
+    command: "jupyter lab"
+    description: "Starts Jupyter Lab server."
+    telemetry_event: "python_jupyter_lab_executed"
+    aliases: ["jl"]
+  django-run:
+    command: "python manage.py runserver"
+    description: "Runs Django development server."
+    telemetry_event: "python_django_runserver_executed"
+    aliases: ["dj-run"]
+  django-migrate:
+    command: "python manage.py migrate"
+    description: "Applies Django database migrations."
+    telemetry_event: "python_django_migrate_executed"
+    aliases: ["dj-mig"]
+
+# Docker commands
+docker:
+  ps:
+    command: "docker ps"
+    description: "Lists running containers."
+    telemetry_event: "docker_ps_executed"
+    aliases: ["ls"]
+  images:
+    command: "docker images"
+    description: "Lists all images."
+    telemetry_event: "docker_images_executed"
+    aliases: ["img"]
+  build:
+    command: "docker build -t {tag} ."
+    description: "Builds an image from a Dockerfile."
+    telemetry_event: "docker_build_executed"
+    aliases: ["b"]
+  run:
+    command: "docker run {options} {image}"
+    description: "Runs a command in a new container."
+    telemetry_event: "docker_run_executed"
+    aliases: ["r"]
+  stop:
+    command: "docker stop {container}"
+    description: "Stops a running container."
+    telemetry_event: "docker_stop_executed"
+  rm:
+    command: "docker rm {container}"
+    description: "Removes a container."
+    telemetry_event: "docker_rm_executed"
+  rmi:
+    command: "docker rmi {image}"
+    description: "Removes an image."
+    telemetry_event: "docker_rmi_executed"
+  exec:
+    command: "docker exec -it {container} {command}"
+    description: "Runs a command in a running container."
+    telemetry_event: "docker_exec_executed"
+  logs:
+    command: "docker logs {container}"
+    description: "Fetches logs from a container."
+    telemetry_event: "docker_logs_executed"
+    aliases: ["log"]
+  compose-up:
+    command: "docker-compose up"
+    description: "Creates and starts containers defined in docker-compose.yml."
+    telemetry_event: "docker_compose_up_executed"
+    aliases: ["dc-up"]
+  compose-down:
+    command: "docker-compose down"
+    description: "Stops and removes containers defined in docker-compose.yml."
+    telemetry_event: "docker_compose_down_executed"
+    aliases: ["dc-down"]
+
